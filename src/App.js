@@ -39,6 +39,16 @@ export default connect((state) => state)(
     }
 
     render() {
+      const titleStyle = {
+        color: 'gray',
+        padding: '10px',
+        fontFamily: 'Arial',
+      };
+
+      const centerTitle = {
+        textAlign: 'center',
+      };
+
       const self = this;
       const cards = this.state.charities.map(function (item, i) {
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
@@ -85,7 +95,9 @@ export default connect((state) => state)(
 
       return (
         <div>
-          <h1>Omise Tamboon React</h1>
+          <div style={centerTitle}>
+            <h1 style={titleStyle}>Omise Tamboon React</h1>
+          </div>
           <p>All donations: {donate}</p>
           <p style={style}>{message}</p>
           {cards}
