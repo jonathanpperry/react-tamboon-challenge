@@ -3,11 +3,25 @@ import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { summaryDonations } from './helpers';
+// Image imports
+import BaanKruNoi from '../public/images/baan-kru-noi.jpg';
+import HFHT from '../public/images/habitat-for-humanity-thailand.jpg';
+import MakhampomTheater from '../public/images/makhampom-theater.jpg';
+import PaperRanger from '../public/images/paper-ranger.jpg';
+import AssociationOfBlind from '../public/images/thailand-association-of-the-blind.jpg';
 
 const Card = styled.div`
   margin: 10px;
   border: 1px solid #ccc;
 `;
+
+const imageImports = [
+  BaanKruNoi,
+  HFHT,
+  MakhampomTheater,
+  PaperRanger,
+  AssociationOfBlind,
+];
 
 export default connect((state) => state)(
   class App extends Component {
@@ -51,6 +65,7 @@ export default connect((state) => state)(
 
       const self = this;
       const cards = this.state.charities.map(function (item, i) {
+        // console.log('I here is: ', i);
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
           <label key={j}>
             <input
@@ -66,6 +81,7 @@ export default connect((state) => state)(
 
         return (
           <Card key={i}>
+            <img src={require(imageImports[i])} alt="" />
             <p>{item.name}</p>
             {payments}
             <button
