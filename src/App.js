@@ -13,6 +13,7 @@ import AssociationOfBlind from '../public/images/thailand-association-of-the-bli
 const Card = styled.div`
   margin: 10px;
   border: 1px solid #ccc;
+  text-align: center;
 `;
 
 const imageImports = [
@@ -63,6 +64,15 @@ export default connect((state) => state)(
         textAlign: 'center',
       };
 
+      const cardContainer = {
+        display: 'grid',
+        gridTemplateColumns: 'auto auto',
+      };
+
+      const imageStyle = {
+        maxWidth: '50%'
+      }
+
       const self = this;
       const cards = this.state.charities.map(function (item, i) {
         // console.log('I here is: ', i);
@@ -80,21 +90,23 @@ export default connect((state) => state)(
         ));
 
         return (
-          <Card key={i}>
-            <img src={imageImports[i]} alt="" />
-            <p>{item.name}</p>
-            {payments}
-            <button
-              onClick={handlePay.call(
-                self,
-                item.id,
-                self.state.selectedAmount,
-                item.currency
-              )}
-            >
-              Pay
-            </button>
-          </Card>
+          <div style={cardContainer}>
+            <Card key={i}>
+              <img src={imageImports[i]} alt="" style={imageStyle} />
+              <p>{item.name}</p>
+              {payments}
+              <button
+                onClick={handlePay.call(
+                  self,
+                  item.id,
+                  self.state.selectedAmount,
+                  item.currency
+                )}
+              >
+                Pay
+              </button>
+            </Card>
+          </div>
         );
       });
 
