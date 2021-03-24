@@ -81,7 +81,7 @@ export default connect((state) => state)(
 
         return (
           <Card key={i}>
-            <img src={require(imageImports[i])} alt="" />
+            <img src={imageImports[i]} alt="" />
             <p>{item.name}</p>
             {payments}
             <button
