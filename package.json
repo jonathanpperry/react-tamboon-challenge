@@ -12,10 +12,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "css-loader": "^5.2.0",
     "isomorphic-fetch": "^3.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
+    "react-toastify": "^7.0.3",
     "redux": "^4.0.5",
     "styled-components": "^5.2.1"
   },
@@ -35,6 +37,7 @@
     "html-webpack-plugin": "^4.5.1",
     "jest": "^26.6.3",
     "json-server": "^0.16.3",
+    "style-loader": "^2.0.0",
     "webpack": "^5.14.0",
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.2"

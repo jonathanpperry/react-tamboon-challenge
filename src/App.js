@@ -10,6 +10,9 @@ import MakhampomTheater from '../public/images/makhampom-theater.jpg';
 import PaperRanger from '../public/images/paper-ranger.jpg';
 import AssociationOfBlind from '../public/images/thailand-association-of-the-blind.jpg';
 
+import { ToastContainer, toast } from 'react-toastify';
+import "!style-loader!css-loader!react-toastify/dist/ReactToastify.css"
+
 const Card = styled.div`
   margin: 10px;
   border: 1px solid #ccc;
