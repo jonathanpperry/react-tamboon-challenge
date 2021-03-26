@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -12,6 +12,8 @@ import AssociationOfBlind from '../public/images/thailand-association-of-the-bli
 // React Toastify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+// CSS
+import './style.css';
 
 const Card = styled.div`
   margin: 10px;
@@ -115,13 +117,12 @@ export default connect((state) => state)(
 
         return (
           <div>
-            <Card key={i}>
+            <Card className="image" key={i}>
               <img src={imageImports[i]} alt="" style={imageStyle} />
-              <CardBottom>
-                <p style={grayTextStyle}>{item.name}</p>
-                <DonateButton>Donate</DonateButton>
-              </CardBottom>
-              {/* {payments}
+              <div className="overlay">
+                {/* Content to place in the overlay goes here */}
+                {/* TODO: Utilize state to set the display of the overlay instead of using hover */}
+                {/* {payments}
               <button
                 onClick={() =>
                   handlePay.call(
@@ -134,6 +135,11 @@ export default connect((state) => state)(
               >
                 Pay
               </button> */}
+              </div>
+              <CardBottom>
+                <p style={grayTextStyle}>{item.name}</p>
+                <DonateButton>Donate</DonateButton>
+              </CardBottom>
             </Card>
           </div>
         );
