@@ -23,7 +23,6 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        exclude: [/node_modules/],
         use: {
           loader: 'babel-loader',
         },
@@ -34,8 +33,8 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
 

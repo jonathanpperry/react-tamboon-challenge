@@ -9,9 +9,9 @@ import HFHT from '../public/images/habitat-for-humanity-thailand.jpg';
 import MakhampomTheater from '../public/images/makhampom-theater.jpg';
 import PaperRanger from '../public/images/paper-ranger.jpg';
 import AssociationOfBlind from '../public/images/thailand-association-of-the-blind.jpg';
-
+// React Toastify
 import { ToastContainer, toast } from 'react-toastify';
-import "!style-loader!css-loader!react-toastify/dist/ReactToastify.css"
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const Card = styled.div`
   margin: 10px;
@@ -32,6 +32,14 @@ export default connect((state) => state)(
     state = {
       charities: [],
       selectedAmount: 10,
+    };
+
+    // Helper functions
+    notify = (id, amount, currency) => {
+      // Call a toast method
+      toast(
+        `Paying ${amount} ${currency} to ${this.state.charities[id - 1].name}`
+      );
     };
 
     componentDidMount() {
@@ -67,18 +75,12 @@ export default connect((state) => state)(
         textAlign: 'center',
       };
 
-      const cardContainer = {
-        display: 'grid',
-        gridTemplateColumns: 'auto auto',
-      };
-
       const imageStyle = {
-        maxWidth: '50%'
-      }
+        maxWidth: '50%',
+      };
 
       const self = this;
       const cards = this.state.charities.map(function (item, i) {
-        // console.log('I here is: ', i);
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
           <label key={j}>
             <input
@@ -93,18 +95,20 @@ export default connect((state) => state)(
         ));
 
         return (
-          <div style={cardContainer}>
+          <div>
             <Card key={i}>
               <img src={imageImports[i]} alt="" style={imageStyle} />
               <p>{item.name}</p>
               {payments}
               <button
-                onClick={handlePay.call(
-                  self,
-                  item.id,
-                  self.state.selectedAmount,
-                  item.currency
-                )}
+                onClick={() =>
+                  handlePay.call(
+                    self,
+                    item.id,
+                    self.state.selectedAmount,
+                    item.currency
+                  )
+                }
               >
                 Pay
               </button>
@@ -129,6 +133,8 @@ export default connect((state) => state)(
           <div style={centerTitle}>
             <h1 style={titleStyle}>Omise Tamboon React</h1>
           </div>
+
+          <ToastContainer hideProgressBar={true} limit={3} />
           <p>All donations: {donate}</p>
           <p style={style}>{message}</p>
           {cards}
@@ -151,4 +157,7 @@ export default connect((state) => state)(
       body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
     })
  */
-function handlePay(id, amount, currency) {}
+function handlePay(id, amount, currency) {
+  // console.log(id, amount, currency);
+  this.notify(id, amount, currency);
+}
