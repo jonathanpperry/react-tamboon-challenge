@@ -19,6 +19,23 @@ const Card = styled.div`
   text-align: center;
 `;
 
+const CardBottom = styled.span`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const DonateButton = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${(props) => (props.primary ? 'royalblue' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'royalblue')};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid royalblue;
+  border-radius: 3px;
+`;
+
 const imageImports = [
   BaanKruNoi,
   HFHT,
@@ -65,7 +82,7 @@ export default connect((state) => state)(
     }
 
     render() {
-      const titleStyle = {
+      const grayTextStyle = {
         color: 'gray',
         padding: '10px',
         fontFamily: 'Arial',
@@ -76,7 +93,9 @@ export default connect((state) => state)(
       };
 
       const imageStyle = {
-        maxWidth: '50%',
+        minWidth: '100%',
+        maxWidth: '100%',
+        maxHeight: '100%',
       };
 
       const self = this;
@@ -98,8 +117,11 @@ export default connect((state) => state)(
           <div>
             <Card key={i}>
               <img src={imageImports[i]} alt="" style={imageStyle} />
-              <p>{item.name}</p>
-              {payments}
+              <CardBottom>
+                <p style={grayTextStyle}>{item.name}</p>
+                <DonateButton>Donate</DonateButton>
+              </CardBottom>
+              {/* {payments}
               <button
                 onClick={() =>
                   handlePay.call(
@@ -111,7 +133,7 @@ export default connect((state) => state)(
                 }
               >
                 Pay
-              </button>
+              </button> */}
             </Card>
           </div>
         );
@@ -131,10 +153,15 @@ export default connect((state) => state)(
       return (
         <div>
           <div style={centerTitle}>
-            <h1 style={titleStyle}>Omise Tamboon React</h1>
+            <h1 style={grayTextStyle}>Omise Tamboon React</h1>
           </div>
 
-          <ToastContainer hideProgressBar={true} limit={3} />
+          <ToastContainer
+            autoClose={3000}
+            position="bottom-right"
+            hideProgressBar={true}
+            limit={3}
+          />
           <p>All donations: {donate}</p>
           <p style={style}>{message}</p>
           {cards}
