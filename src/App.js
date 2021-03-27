@@ -156,7 +156,7 @@ export default connect((state) => state)(
       });
 
       const donate = this.props.donate;
-      const message = this.props.message;
+      // const message = this.props.message;
 
       return (
         <div>
@@ -201,6 +201,11 @@ function handlePay(id, amount, currency) {
       'Content-Type': 'application/json',
     },
     body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
+  }).then((data) => {
+    this.props.dispatch({
+      type: 'UPDATE_TOTAL_DONATE',
+      amount,
+    });
   });
 
   // Send toast message to user
