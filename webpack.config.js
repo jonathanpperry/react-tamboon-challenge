@@ -1,10 +1,11 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   entry: './src/index.js',
   output: {
     publicPath: '/dist/',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'main.js',
   },
 
@@ -12,12 +13,13 @@ const config = {
 
   devServer: {
     inline: true,
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 3000,
     historyApiFallback: true,
     disableHostCheck: true,
     contentBase: 'public',
   },
+  mode: 'development',
 
   module: {
     rules: [
@@ -37,8 +39,7 @@ const config = {
       },
     ],
   },
-
-  mode: 'development',
+  target: 'node',
 };
 
 module.exports = config;

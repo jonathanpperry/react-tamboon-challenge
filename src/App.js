@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -26,7 +26,7 @@ const CardBottom = styled.span`
   justify-content: space-between;
 `;
 
-const DonateButton = styled.button`
+const StyledButton = styled.button`
   /* Adapt the colors based on primary prop */
   background: ${(props) => (props.primary ? 'royalblue' : 'white')};
   color: ${(props) => (props.primary ? 'white' : 'royalblue')};
@@ -55,10 +55,16 @@ export default connect((state) => state)(
 
     // Helper functions
     notify = (id, amount, currency) => {
+      const self = this;
+      var message = `Paying ${amount} ${currency} to ${
+        this.state.charities[id - 1].name
+      }`;
+      self.props.dispatch({
+        type: 'UPDATE_MESSAGE',
+        message: message,
+      });
       // Call a toast method
-      toast(
-        `Paying ${amount} ${currency} to ${this.state.charities[id - 1].name}`
-      );
+      toast(message);
     };
 
     componentDidMount() {
@@ -122,36 +128,32 @@ export default connect((state) => state)(
               <div className="overlay">
                 {/* Content to place in the overlay goes here */}
                 {/* TODO: Utilize state to set the display of the overlay instead of using hover */}
-                {/* {payments}
-              <button
-                onClick={() =>
-                  handlePay.call(
-                    self,
-                    item.id,
-                    self.state.selectedAmount,
-                    item.currency
-                  )
-                }
-              >
-                Pay
-              </button> */}
+                <p style={grayTextStyle}>
+                  Select the amount to donate ({item.currency})
+                </p>
+                {payments}
+                <br />
+                <StyledButton
+                  onClick={() =>
+                    handlePay.call(
+                      self,
+                      item.id,
+                      self.state.selectedAmount,
+                      item.currency
+                    )
+                  }
+                >
+                  Pay
+                </StyledButton>
               </div>
               <CardBottom>
                 <p style={grayTextStyle}>{item.name}</p>
-                <DonateButton>Donate</DonateButton>
+                <StyledButton>Donate</StyledButton>
               </CardBottom>
             </Card>
           </div>
         );
       });
-
-      const style = {
-        color: 'red',
-        margin: '1em 0',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        textAlign: 'center',
-      };
 
       const donate = this.props.donate;
       const message = this.props.message;
@@ -168,8 +170,9 @@ export default connect((state) => state)(
             hideProgressBar={true}
             limit={3}
           />
-          <p>All donations: {donate}</p>
-          <p style={style}>{message}</p>
+          <div style={centerTitle}>
+            <p style={grayTextStyle}>All donations: {donate}</p>
+          </div>
           {cards}
         </div>
       );
@@ -191,6 +194,15 @@ export default connect((state) => state)(
     })
  */
 function handlePay(id, amount, currency) {
-  // console.log(id, amount, currency);
+  fetch('http://localhost:3001/payments', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
+  });
+
+  // Send toast message to user
   this.notify(id, amount, currency);
 }

@@ -22,13 +22,13 @@
       "id": 4,
       "name": "Makhampom Theater",
       "image": "makhampom-theater.jpg",
-      "currency": "THB"
+      "currency": "USD"
     },
     {
       "id": 5,
       "name": "Thailand Association of the Blind",
       "image": "thailand-association-of-the-blind.jpg",
-      "currency": "THB"
+      "currency": "USD"
     }
   ],
   "payments": [
@@ -67,6 +67,18 @@
       "amount": 500,
       "currency": "THB",
       "id": 6
+    },
+    {
+      "charitiesId": 1,
+      "amount": 500,
+      "currency": "THB",
+      "id": 7
+    },
+    {
+      "charitiesId": 2,
+      "amount": 50,
+      "currency": "THB",
+      "id": 8
     }
   ]
 }
