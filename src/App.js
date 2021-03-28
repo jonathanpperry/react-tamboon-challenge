@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 // CSS
 import './style.css';
+import { Grid, Col, Row } from 'react-styled-flexboxgrid';
 
 const Card = styled.div`
   margin: 10px;
@@ -122,7 +123,7 @@ export default connect((state) => state)(
         ));
 
         return (
-          <div>
+          <Col xs={12} md={6}>
             <Card className="image" key={i}>
               <img src={imageImports[i]} alt="" style={imageStyle} />
               <div className="overlay">
@@ -151,7 +152,7 @@ export default connect((state) => state)(
                 <StyledButton>Donate</StyledButton>
               </CardBottom>
             </Card>
-          </div>
+          </Col>
         );
       });
 
@@ -173,7 +174,9 @@ export default connect((state) => state)(
           <div style={centerTitle}>
             <p style={grayTextStyle}>All donations: {donate}</p>
           </div>
-          {cards}
+          <Grid>
+            <Row>{cards}</Row>
+          </Grid>
         </div>
       );
     }
