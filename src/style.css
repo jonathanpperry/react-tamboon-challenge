@@ -2,6 +2,7 @@
   position: relative;
   display: inline-block;
   margin: 10px;
+  width: 100%;
 }
 .overlay {
   display: none;

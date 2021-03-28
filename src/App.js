@@ -102,9 +102,8 @@ export default connect((state) => state)(
       };
 
       const imageStyle = {
-        minWidth: '100%',
         maxWidth: '100%',
-        maxHeight: '100%',
+        height: '40vh'
       };
 
       const self = this;
